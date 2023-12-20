@@ -1,0 +1,148 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+#subtitle {
+    text-align: center;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 30px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+}
+
+.search input {
+    padding: 8px;
+    width: 200px;
+}
+
+.user {
+    position: relative;
+    cursor: pointer;
+}
+
+.user-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.user-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 150px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    row-gap: 15px;
+}
+.user-menu strong {
+    color: black;
+}
+.user-menu p {
+    margin: 0px;
+    margin-top: 10px;
+}
+#admin-label {
+    color: #3498db;
+}
+
+main {
+    padding: 20px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: 300px 300px 300px;
+    grid-template-rows: 450px;
+    gap: 60px;
+    margin: auto;
+    width: 1020px;
+}
+
+.product {
+    border: 1px solid #ddd;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.product img {
+    width: 200px;
+    margin: auto;
+}
+
+.product button {
+    margin-right: 5px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination button {
+    margin-right: 5px;
+    
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+.pagination > #pagination-active {
+    background-color: #333;
+    color: #fff;
+}
+
+.filters {
+    margin-top: 20px;
+}
+
+.filters button {
+    margin-right: 5px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    bottom: 0;
+}
+
+.delete-to-cart{
+    background-color: red;
+}

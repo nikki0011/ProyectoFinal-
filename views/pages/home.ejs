@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./home.css">
+    <title>Ecommerce - Tienda de Ropa en Línea</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <span>Ecommerce</span>
+            </div>
+            <div class="search">
+                <input type="text" placeholder="Buscar productos...">
+            </div>
+            <div class="user">
+                <img src="./photo_profile.webp" alt="Usuario" class="user-image" onclick="toggleMenu()">
+                <div class="user-menu" id="userMenu">
+                    <p><strong><%= user.name %></strong></p>
+                    <% if (user.isAdmin) { %>
+                        <span id="admin-label">Admin</span>
+                        <a href="./dashboard">Dashboard</a>
+                      <% } %>
+                    <a href="/cart">Carrito de Compras</a>
+                    <a href="#">Mis compras</a>
+                    <a href="#">Editar Perfil</a>
+                    <a onclick="logout()">Salir</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h2 id="subtitle">Nuestros productos</h2>
+        <div class="product-grid">
+            <!-- Aquí irán los productos en forma de cuadrícula -->
+            <!-- Ejemplo de un producto -->
+            <% for (var i =0; i < products.length;  i++ ) { %>
+                <% var existInCart = cart.some(id => products[i]._id.toString() === id.toString())  %>
+                <div class="product" >
+                    <img src="<%= products[i].image %>" alt="Producto">
+                    <h3><%= products[i].name %></h3>
+                    <p><%= products[i].description %></p>
+                    <p><%= products[i].price %></p>
+                    <button class="<%= existInCart ? "delete-to-cart" : "" %> " onclick="addProductToCart('<%=products[i]._id%>')"><%= cart.some(id => products[i]._id.toString() === id.toString()) ? "sacar del carrito" : "agregar al carrito" %></button>
+                </div>
+                <% } %>
+           
+           
+            <!-- Repetir este bloque para cada producto -->
+        </div>
+
+        <div class="pagination">
+            <!-- Aquí irá la paginación -->
+            <button id="pagination-active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <!-- Agregar más botones según sea necesario -->
+        </div>
+
+       
+    </main>
+
+    <footer>
+        <!-- Contenido del footer -->
+        <p>&copy; 2023 Ecommerce - Tienda de Ropa en Línea. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            var userMenu = document.getElementById("userMenu");
+            userMenu.style.display = (userMenu.style.display === "flex") ? "none" : "flex";
+        }
+        
+        async function logout(){
+           await  fetch('http://localhost:3000/api/logout')
+           document.cookie = "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+           window.location.href = 'http://localhost:3000/login'
+         }
+    </script>
+    <script src="./scripts/home.js"></script>
+</body>
+</html>

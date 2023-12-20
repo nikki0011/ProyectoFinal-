@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración</title>
+  <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+              <a href="/">
+              <span>Ecommerce</span>
+              </a>
+            </div>
+            <div class="user">
+                <img src="./photo_profile.webp" alt="Usuario" class="user-image" onclick="toggleMenu()">
+                <div class="user-menu" id="userMenu">
+                    <p><strong>Nombre de Usuario</strong></p>
+                    <span id="admin-label">Admin</span>
+                    <a href="#">Dashboard</a>
+                    <a href="#">Carrito de Compras</a>
+                    <a href="#">Mis compras</a>
+                    <a href="#">Editar Perfil</a>
+                    <a href="#">Salir</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+  <div class="container">
+    <h1>Panel de Administración</h1>
+    
+    <!-- Sección de Productos -->
+    <section class="products">
+      <h2>Productos</h2>
+      <ul id="list-products">
+       
+      </ul>
+      <button class="create-btn" onclick="openCreateModal()">Crear Nuevo Producto</button>
+      <!-- Aquí van funciones para crear, editar y borrar productos -->
+    </section>
+
+    <!-- Sección de Órdenes de Compra -->
+    <section class="orders">
+      <h2>Órdenes de Compra</h2>
+      <ul>
+        <li>
+          Orden #1 - Total: $50 <span class="order_status pending">Pendiente</span>
+          <button class="edit-btn"  onclick="openEditOrderModal()">Editar</button>
+          <button class="delete-btn" onclick="openDeleteModal()">Borrar</button>
+        </li>
+        <li>
+          Orden #2 - Total: $75 <span class="order_status send">Enviado</span>
+          <button class="edit-btn"  onclick="openEditOrderModal()">Editar</button>
+          <button class="delete-btn" onclick="openDeleteModal()">Borrar</button>
+        </li>
+        <li>
+          Orden #3 - Total: $100 <span class="order_status done">Entregado</span>
+          <button class="edit-btn"  onclick="openEditOrderModal()">Editar</button>
+          <button class="delete-btn" onclick="openDeleteModal()">Borrar</button>
+        </li>
+      </ul>
+      <!-- Aquí van funciones para gestionar órdenes de compra -->
+    </section>
+  </div>
+
+  <!-- Modal para Crear Nuevo Producto -->
+  <div id="createModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeCreateModal()">&times;</span>
+      <h2>Crear Nuevo Producto</h2>
+      <!-- Formulario para ingresar detalles del nuevo producto -->
+      <form id="createProductForm">
+        <label for="productName">Nombre:</label>
+        <input type="text" id="productName" name="productName" required>
+        
+        <label for="productPrice">Precio:</label>
+        <input type="number" id="productPrice" name="productPrice" required>
+        
+        <label for="productDescription">Descripción:</label>
+        <textarea id="productDescription" name="productDescription" required></textarea>
+        
+        <label for="productImage">Imagen:</label>
+        <input type="text" id="productImage" name="productImage" required>
+        
+        <button type="submit" onclick="createProduct()">Crear Producto</button>
+      </form>
+    </div>
+    </div>
+   <!-- Modal para Editar Producto -->
+    <div id="editProductModal" class="modal">
+        <div class="modal-content">
+        <span class="close" onclick="closeEditModal()">&times;</span>
+        <h2>Editar Producto</h2>
+        <!-- Formulario para editar detalles del producto -->
+        <form id="editProductForm">
+            <label for="editProductName">Nombre:</label>
+            <input type="text" id="editProductName" name="editProductName" required>
+    
+            <label for="editProductPrice">Precio:</label>
+            <input type="number" id="editProductPrice" name="editProductPrice" required>
+    
+            <label for="editProductDescription">Descripción:</label>
+            <textarea id="editProductDescription" name="editProductDescription" required></textarea>
+    
+            <label for="editProductImage">Imagen:</label>
+            <input type="text" id="editProductImage" name="editProductImage" required>
+    
+            <button type="submit" onclick="updateProduct()">Guardar Cambios</button>
+        </form>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Orden de Compra -->
+    <div id="editOrderModal" class="modal">
+        <div class="modal-content">
+        <span class="close" onclick="closeEditOrderModal()">&times;</span>
+        <h2>Editar Orden de Compra</h2>
+        <!-- Formulario para editar el estado de la orden -->
+        <form id="editOrderForm">
+            <label for="editOrderStatus">Estado:</label>
+            <select id="editOrderStatus" name="editOrderStatus" required>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Enviado">Enviado</option>
+            <option value="Entregado">Entregado</option>
+            <option value="Cancelado">Cancelado</option>
+            </select>
+    
+            <button type="submit">Guardar Cambios</button>
+        </form>
+        </div>
+    </div>
+
+        <!-- Modal para Eliminar Producto u Orden -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+        <span class="close" onclick="closeDeleteModal()">&times;</span>
+        <h2>Confirmar Eliminación</h2>
+        <p>¿Estás seguro de que deseas eliminar este producto/orden?</p>
+        <button id="confirmDeleteBtn" onclick="confirmDelete()">Eliminar</button>
+        <button onclick="closeDeleteModal()">Cancelar</button>
+        </div>
+    </div>
+
+  <script >
+            function openCreateModal() {
+            document.getElementById('createModal').style.display = 'block';
+            }
+
+            function closeCreateModal() {
+            document.getElementById('createModal').style.display = 'none';
+            }
+
+            
+
+          
+
+            // Función para abrir el modal de edición de órdenes de compra
+            function openEditOrderModal() {
+            document.getElementById('editOrderModal').style.display = 'block';
+            }
+
+            // Función para cerrar el modal de edición de órdenes de compra
+            function closeEditOrderModal() {
+            document.getElementById('editOrderModal').style.display = 'none';
+            }
+
+            
+
+           
+
+
+            function toggleMenu() {
+            var userMenu = document.getElementById("userMenu");
+            userMenu.style.display = (userMenu.style.display === "flex") ? "none" : "flex";
+        }
+  </script>
+  <script src="./scripts/dashboard.js"></script>
+</body>
+</html>
